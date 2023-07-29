@@ -5,10 +5,8 @@
 # ______________________________
 # Copyright (c) Juan Martin 2021
 
-
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 def run_app() -> None:
     """ Creates a QT5 application and binds the callbacks set in main.py. """
