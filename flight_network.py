@@ -1,9 +1,3 @@
-
-# ~ FLIGHT NETWORK ~
-# Contains the classes "FlightNetwork" and "Flight".
-# FlightNetwork represents a graph of interconected airports and flights.
-# Flight is an edge in the network.
-# ______________________________
 # Copyright (c) Juan Martin 2021
 
 import csv
