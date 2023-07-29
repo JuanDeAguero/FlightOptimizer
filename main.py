@@ -5,10 +5,8 @@
 # ______________________________
 # Copyright (c) Juan Martin 2021
 
-
 from flight_network import FlightNetwork
 import gui
-
 
 def on_app_start() -> None:
     """ Called once when the app starts. """
@@ -18,7 +16,6 @@ def on_app_start() -> None:
     gui.set_departure_text( "SAN" )
     gui.set_arrival_text( "JFK" )
     on_search_clicked()
-
 
 def on_search_clicked() -> None:
     """ Called when the search button is pressed. """
@@ -96,7 +93,6 @@ def on_search_clicked() -> None:
 
     print( "[INFO] " + str( len( texts ) ) + " flight combinations found." )
 
-
 def on_flight_path_clicked( index: int ) -> None:
     """ Called when one of the flight path items is clicked.
         index: item index. """
@@ -125,20 +121,17 @@ def on_flight_path_clicked( index: int ) -> None:
 
     print( "[INFO] Item #" + str( index + 1 ) + " selected." )
 
-
 def on_show_airport_codes_checked() -> None:
     """ Called when the "Show all airport codes" checkbox is clicked
         and its state is checked. """
     gui.show_all_codes()
     print( "[INFO] Airport codes visible." )
 
-
 def on_show_airport_codes_unchecked() -> None:
     """ Called when the "Show all airport codes" checkbox is clicked
         and its state is unchecked. """
     gui.hide_all_codes()
     print( "[INFO] Airport codes hidden." )
-
 
 if __name__ == "__main__":
 
