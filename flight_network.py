@@ -6,14 +6,10 @@
 # ______________________________
 # Copyright (c) Juan Martin 2021
 
-
 import csv
 
-
 class Flight:
-    
     """ An edge in the FlightNetwork graph which represents a single Flight.
-
         departure: code of the departure airport
         arrival:   code of the arrival airport
         distance:  travel distance in miles
@@ -26,35 +22,26 @@ class Flight:
     _cost: float
     _airline: str
 
-
     def __init__( self, departure: str, arrival: str, distance: int, cost: float, airline: str ) -> None:
         self._departure = departure
         self._arrival = arrival
         self._distance = distance
         self._cost = cost
         self._airline = airline
-    
 
     def get_distance( self ) -> int:
         return self._distance
 
-
     def get_cost( self ) -> float:
         return self._cost
 
-
 class FlightNetwork:
-
     """ Abstract representation of a flight network implemented as a graph.
         Flight represents the edges and the vertices are the airports (str).
-
         flights: dictionary storing airport as keys an the set of outgoing flight as values.
-                 { Airport: { Flight, Flight, ... }, Airport: { Flight, Flight, ... }, ... }
-
-        """
+                 { Airport: { Flight, Flight, ... }, Airport: { Flight, Flight, ... }, ... } """
 
     _flights: dict()
-
 
     def load( self, file_path: str ) -> None:
         """ Load the data from the given csv file into the _flights dictionary. """
@@ -106,14 +93,12 @@ class FlightNetwork:
 
         print( "[INFO] Graph fully loaded." + p )
 
-
     def get_paths( self, departure: str, arrival: str ) -> list():
         """ Returns all the possible paths between two airports in the network. """
 
         paths = []
         self._get_paths_recursion( departure, arrival, paths=paths )
         return paths
-    
 
     def _get_paths_recursion( self, departure: str, arrival: str,
                               visited = set(), path = list(), paths = list() ) -> None:
@@ -134,7 +119,6 @@ class FlightNetwork:
         path.pop()
         visited.remove( departure )
 
-
     def get_connecting_flight( self, departure: str, arrival: str ) -> Flight:
         """ Returns the flight class between two connected airports. """
 
@@ -144,15 +128,3 @@ class FlightNetwork:
                 return flight
         print( "[ERROR] " + departure + " and " + arrival + " are NOT connected!" )
         return Flight( "", "", 0, 0, "" )
-
-
-# FlightNetwork currently represents an Airport as a str.
-# A future improvement would include an Airport class like the following.
-# class Airport:
-# 
-#     _code: str
-#     _city: str
-# 
-#     def __init__( self, code: str, city: str ):
-#         self._code = code
-#         self._city = city
