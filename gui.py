@@ -1,8 +1,3 @@
-
-# ~ GUI ~
-# Contains functions abstracting the QT5 calls
-# and all the auto-generated code from QT5 designer.
-# ______________________________
 # Copyright (c) Juan Martin 2021
 
 import sys
