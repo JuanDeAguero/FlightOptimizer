@@ -1,8 +1,3 @@
-
-# ~ MAIN ~
-# This module is the starting point of the application.
-# Handles user interaction with the GUI and the Flight Network.
-# ______________________________
 # Copyright (c) Juan Martin 2021
 
 from flight_network import FlightNetwork
