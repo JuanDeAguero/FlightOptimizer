@@ -1,35 +1,32 @@
-# Copyright (c) Juan Martin 2021
-
-import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
 
 def run_app() -> None:
-    """ Creates a QT5 application and binds the callbacks set in main.py. """
     
-    # Create QT5 application and window.
+    # create QT5 application and window
     app = QtWidgets.QApplication(sys.argv)
     main_window = QtWidgets.QMainWindow()
 
-    # Create QT5 ui class to handle the GUI interaction.
+    # create QT5 UI class to handle the GUI interaction
     global qt5gui
     qt5gui = Ui_main_window()
     qt5gui.setupUi(main_window)
 
-    # Show the window.
+    # show the window
     main_window.show()
 
-    # Bind callbacks set in main.py
-    qt5gui.btn_search.clicked.connect( on_search_clicked )
-    qt5gui.cb_codes.clicked.connect( on_show_airport_codes_clicked )
-    qt5gui.btn_flight_path_1.clicked.connect( on_flight_path_1_clicked )
-    qt5gui.btn_flight_path_2.clicked.connect( on_flight_path_2_clicked )
-    qt5gui.btn_flight_path_3.clicked.connect( on_flight_path_3_clicked )
-    qt5gui.btn_flight_path_4.clicked.connect( on_flight_path_4_clicked )
-    qt5gui.btn_flight_path_5.clicked.connect( on_flight_path_5_clicked )
-    qt5gui.btn_flight_path_6.clicked.connect( on_flight_path_6_clicked )
-    qt5gui.btn_flight_path_7.clicked.connect( on_flight_path_7_clicked )
+    # bind callbacks set in main.py
+    qt5gui.btn_search.clicked.connect(on_search_clicked)
+    qt5gui.cb_codes.clicked.connect(on_show_airport_codes_clicked)
+    qt5gui.btn_flight_path_1.clicked.connect(on_flight_path_1_clicked)
+    qt5gui.btn_flight_path_2.clicked.connect(on_flight_path_2_clicked)
+    qt5gui.btn_flight_path_3.clicked.connect(on_flight_path_3_clicked)
+    qt5gui.btn_flight_path_4.clicked.connect(on_flight_path_4_clicked)
+    qt5gui.btn_flight_path_5.clicked.connect(on_flight_path_5_clicked)
+    qt5gui.btn_flight_path_6.clicked.connect(on_flight_path_6_clicked)
+    qt5gui.btn_flight_path_7.clicked.connect(on_flight_path_7_clicked)
 
-    # Codes used for showing/hidding airport codes on the map.
+    # codes used for showing and hidding airport codes on the map
     global codes
     codes = {
         "ABQ": qt5gui.txt_ABQ,
@@ -92,67 +89,55 @@ def run_app() -> None:
         qt5gui.w_flight_path_7
     ]
 
-    # This method is defined in main.py
+    # method defined in main.py
     on_app_start()
 
-    # Run the app until users closes the window or console.
+    # run the app until users closes the window or console
     sys.exit(app.exec_())
 
-
-def set_on_app_start( event ) -> None:
+def set_on_app_start(event) -> None:
     global on_app_start
     on_app_start = event
 
-
-def set_on_search_clicked( event ) -> None:
+def set_on_search_clicked(event) -> None:
     global on_search_clicked
     on_search_clicked = event
 
-
-def set_on_flight_path_1_clicked( event ) -> None:
+def set_on_flight_path_1_clicked(event) -> None:
     global on_flight_path_1_clicked
     on_flight_path_1_clicked = event
 
-
-def set_on_flight_path_2_clicked( event ) -> None:
+def set_on_flight_path_2_clicked(event) -> None:
     global on_flight_path_2_clicked
     on_flight_path_2_clicked = event
 
-
-def set_on_flight_path_3_clicked( event ) -> None:
+def set_on_flight_path_3_clicked(event) -> None:
     global on_flight_path_3_clicked
     on_flight_path_3_clicked = event
 
-
-def set_on_flight_path_4_clicked( event ) -> None:
+def set_on_flight_path_4_clicked(event) -> None:
     global on_flight_path_4_clicked
     on_flight_path_4_clicked = event
 
-
-def set_on_flight_path_5_clicked( event ) -> None:
+def set_on_flight_path_5_clicked(event) -> None:
     global on_flight_path_5_clicked
     on_flight_path_5_clicked = event
 
-
-def set_on_flight_path_6_clicked( event ) -> None:
+def set_on_flight_path_6_clicked(event) -> None:
     global on_flight_path_6_clicked
     on_flight_path_6_clicked = event
 
-
-def set_on_flight_path_7_clicked( event ) -> None:
+def set_on_flight_path_7_clicked(event) -> None:
     global on_flight_path_7_clicked
     on_flight_path_7_clicked = event
 
-
-def set_on_show_airport_codes_checked( event ) -> None:
+def set_on_show_airport_codes_checked(event) -> None:
     global on_show_airport_codes_checked
     on_show_airport_codes_checked = event
 
-
-def set_on_show_airport_codes_unchecked( event ) -> None:
+def set_on_show_airport_codes_unchecked(event) -> None:
     global on_show_airport_codes_unchecked
     on_show_airport_codes_unchecked = event
-
 
 def on_show_airport_codes_clicked() -> None:
     if qt5gui.cb_codes.checkState():
@@ -160,115 +145,98 @@ def on_show_airport_codes_clicked() -> None:
     else:
         on_show_airport_codes_unchecked()
 
-
-def set_flight_path_text( text: str, index: int ) -> None:
+def set_flight_path_text(text: str, index: int) -> None:
     if index == 0:
-        qt5gui.txt_flight_path_1.setText( text )
+        qt5gui.txt_flight_path_1.setText(text)
     elif index == 1:
-        qt5gui.txt_flight_path_2.setText( text )
+        qt5gui.txt_flight_path_2.setText(text)
     elif index == 2:
-        qt5gui.txt_flight_path_3.setText( text )
+        qt5gui.txt_flight_path_3.setText(text)
     elif index == 3:
-        qt5gui.txt_flight_path_4.setText( text )
+        qt5gui.txt_flight_path_4.setText(text)
     elif index == 4:
-        qt5gui.txt_flight_path_5.setText( text )
+        qt5gui.txt_flight_path_5.setText(text)
     elif index == 5:
-        qt5gui.txt_flight_path_6.setText( text )
+        qt5gui.txt_flight_path_6.setText(text)
     elif index == 6:
-        qt5gui.txt_flight_path_7.setText( text )
+        qt5gui.txt_flight_path_7.setText(text)
 
-
-def set_flight_path_distance( text: str, index: int ) -> None:
+def set_flight_path_distance(text: str, index: int) -> None:
     if index == 0:
-        qt5gui.txt_distance_1.setText( text )
+        qt5gui.txt_distance_1.setText(text)
     elif index == 1:
-        qt5gui.txt_distance_2.setText( text )
+        qt5gui.txt_distance_2.setText(text)
     elif index == 2:
-        qt5gui.txt_distance_3.setText( text )
+        qt5gui.txt_distance_3.setText(text)
     elif index == 3:
-        qt5gui.txt_distance_4.setText( text )
+        qt5gui.txt_distance_4.setText(text)
     elif index == 4:
-        qt5gui.txt_distance_5.setText( text )
+        qt5gui.txt_distance_5.setText(text)
     elif index == 5:
-        qt5gui.txt_distance_6.setText( text )
+        qt5gui.txt_distance_6.setText(text)
     elif index == 6:
-        qt5gui.txt_distance_7.setText( text )
+        qt5gui.txt_distance_7.setText(text)
 
-
-def set_flight_path_price( text: str, index: int ) -> None:
+def set_flight_path_price(text: str, index: int) -> None:
     if index == 0:
-        qt5gui.txt_price_1.setText( text )
+        qt5gui.txt_price_1.setText(text)
     elif index == 1:
-        qt5gui.txt_price_2.setText( text )
+        qt5gui.txt_price_2.setText(text)
     elif index == 2:
-        qt5gui.txt_price_3.setText( text )
+        qt5gui.txt_price_3.setText(text)
     elif index == 3:
-        qt5gui.txt_price_4.setText( text )
+        qt5gui.txt_price_4.setText(text)
     elif index == 4:
-        qt5gui.txt_price_5.setText( text )
+        qt5gui.txt_price_5.setText(text)
     elif index == 5:
-        qt5gui.txt_price_6.setText( text )
+        qt5gui.txt_price_6.setText(text)
     elif index == 6:
-        qt5gui.txt_price_7.setText( text )
+        qt5gui.txt_price_7.setText(text)
 
+def set_border_location(x: int, y: int) -> None:
+    qt5gui.w_selected_border.setGeometry(QtCore.QRect(x, y, 354, 89))
 
-def set_border_location( x: int, y: int ) -> None:
-    qt5gui.w_selected_border.setGeometry(QtCore.QRect( x, y, 354, 89 ))
+def set_departure_text(text: str) -> None:
+    qt5gui.txte_departure.setPlainText(text)
 
-
-def set_departure_text( text: str ) -> None:
-    qt5gui.txte_departure.setPlainText( text )
-
-
-def set_arrival_text( text: str ) -> None:
-    qt5gui.txte_arrival.setPlainText( text )
-
+def set_arrival_text(text: str) -> None:
+    qt5gui.txte_arrival.setPlainText(text)
 
 def get_departure() -> str:
     return qt5gui.txte_departure.toPlainText()
 
-
 def get_arrival() -> str:
     return qt5gui.txte_arrival.toPlainText()
 
-
-def check_code_in_map( code: str ) -> bool:
+def check_code_in_map(code: str) -> bool:
     if code in codes:
         return True
     else:
         return False
 
-
 def show_all_codes() -> None:
     for code in codes.values():
         code.show()
-
 
 def hide_all_codes() -> None:
     for code in codes.values():
         code.hide()
 
-
-def show_code( code: str ) -> None:
+def show_code(code: str) -> None:
     codes[code].show()
 
-
 def uncheck_show_airport_codes() -> None:
-    qt5gui.cb_codes.setChecked( False )
-
+    qt5gui.cb_codes.setChecked(False)
 
 def hide_all_path_widget() -> None:
     for widget in widgets:
         widget.hide()
 
-
-def show_path_widget( index: int ) -> None:
+def show_path_widget(index: int) -> None:
     widgets[index].show()
-
 
 def show_border() -> None:
     qt5gui.w_selected_border.show()
-
 
 def hide_border() -> None:
     qt5gui.w_selected_border.hide()
