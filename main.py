@@ -20,7 +20,7 @@ def on_search_clicked() -> None:
     gui.hide_all_path_widget()
     gui.hide_border()
     paths = network.get_paths(departure, arrival)
-
+    
     texts = []
     distances = []
     prices = []
