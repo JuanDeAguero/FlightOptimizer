@@ -26,18 +26,13 @@ class FlightNetwork:
     _flights: dict()
 
     def load(self, file_path: str) -> None:
-
         self._flights = dict()
         c = 0
         connections = []
-
         with open(file_path) as csv_file:
             reader = csv.reader(csv_file)
             for row in reader:
-
-                # this value can be modified to reduce the loading time at the start
                 limit = 1100000
-
                 percentage = (c / limit) * 100
                 log = str("Loading graph... [" + str(int(percentage)) + "%] [" + str(c) + "/" + str(1100000) + "]")
                 print(log, end="\r")
@@ -47,28 +42,20 @@ class FlightNetwork:
                 elif c > limit:
                     break
                 c += 1
-
-                # check that there are not two flight with the same departure and destination
                 connection = (row[0], row[1])
                 if connection not in connections:
                     connections.append(connection)
-
                     departure = row[0]
                     arrival = row[1]
-
-                    # create the Flight class using the values in row
                     flight = Flight(departure, arrival, int(row[2]), float(row[3]), row[4])
-
                     if departure not in self._flights:
                         self._flights[departure] = set()
                     if arrival not in self._flights:
                         self._flights[arrival] = set()
                     self._flights[departure].add(flight)
-
         p = " "
         for _ in range(50):
             p += " "
-
         print("[INFO] Graph fully loaded." + p)
 
     def get_paths(self, departure: str, arrival: str) -> list():
@@ -80,12 +67,12 @@ class FlightNetwork:
         visited.add(departure)
         path.append(departure)
         if len(path) < 4:
-            if departure == arrival: # base case
+            if departure == arrival:
                 paths.append(path.copy())
             else:
                 for flight in self._flights[departure]:
                     airport = flight._arrival
-                    if airport not in visited: # recursive step
+                    if airport not in visited:
                         self._get_paths_recursion(airport, arrival, visited, path, paths)
         path.pop()
         visited.remove(departure)

@@ -9,26 +9,18 @@ def on_app_start() -> None:
     on_search_clicked()
 
 def on_search_clicked() -> None:
-
     departure = gui.get_departure()
     arrival = gui.get_arrival()
-
-    # check user inputs are valid
     if departure not in network._flights.keys() or arrival not in network._flights.keys():
         print("[ERROR] Invalid airport code.")
         return
     if departure == arrival:
         print("[ERROR] No need to take a plane!")
         return
-
     gui.hide_all_path_widget()
     gui.hide_border()
-
-    # get paths from the network
     paths = network.get_paths(departure, arrival)
 
-    # create lists of texts, distances and prices for the GUI items
-    # using the paths extracted from the network
     texts = []
     distances = []
     prices = []
@@ -45,7 +37,6 @@ def on_search_clicked() -> None:
         distances.append(distance)
         prices.append(cost)
 
-    # sort distances and update texts and prices accordingly
     global sorted_texts
     sorted_distances = sorted(distances)
     sorted_texts = []
@@ -62,7 +53,6 @@ def on_search_clicked() -> None:
     sorted_texts = sorted_texts[:7]
     sorted_prices = sorted_prices[:7]
 
-    # use texts, distances and prices to update the GUI items
     for i in range(7):
         if i < len(sorted_texts):
             gui.set_flight_path_text(sorted_texts[i], i)
@@ -79,19 +69,14 @@ def on_search_clicked() -> None:
     for i in range(n):
         gui.show_path_widget(i)
     on_flight_path_clicked(0)
-    
     print("[INFO] " + str(len(texts)) + " flight combinations found.")
 
 def on_flight_path_clicked(index: int) -> None:
-
     if index + 1 > len(sorted_texts):
         return
-    
     gui.set_border_location(988, 188 + (100 * index))
     gui.hide_all_codes()
     gui.uncheck_show_airport_codes()
-
-    # check that the airport codes are included in the GUI map
     code1 = sorted_texts[index][0] + sorted_texts[index][1] + sorted_texts[index][2]
     code2 = sorted_texts[index][6] + sorted_texts[index][7] + sorted_texts[index][8]
     if not gui.check_code_in_map(code1) or not gui.check_code_in_map(code2):
@@ -105,7 +90,6 @@ def on_flight_path_clicked(index: int) -> None:
         gui.show_code(code3)
     gui.show_code(code1)
     gui.show_code(code2)
-
     print("[INFO] Item #" + str(index + 1) + " selected.")
 
 def on_show_airport_codes_checked() -> None:
@@ -117,13 +101,9 @@ def on_show_airport_codes_unchecked() -> None:
     print("[INFO] Airport codes hidden.")
 
 if __name__ == "__main__":
-
-    # 1. create and load the Flight Network
     global network
     network = FlightNetwork()
     network.load("flights.csv")
-    
-    # 2. bind all the GUI callbacks
     gui.set_on_app_start(on_app_start)
     gui.set_on_search_clicked(on_search_clicked)
     gui.set_on_flight_path_1_clicked(lambda: on_flight_path_clicked(0))
@@ -135,6 +115,4 @@ if __name__ == "__main__":
     gui.set_on_flight_path_7_clicked(lambda: on_flight_path_clicked(6))
     gui.set_on_show_airport_codes_checked(on_show_airport_codes_checked)
     gui.set_on_show_airport_codes_unchecked(on_show_airport_codes_unchecked)
-
-    # 3. run the app
     gui.run_app()

@@ -2,20 +2,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 
 def run_app() -> None:
-    
-    # create QT5 application and window
     app = QtWidgets.QApplication(sys.argv)
     main_window = QtWidgets.QMainWindow()
-
-    # create QT5 UI class to handle the GUI interaction
     global qt5gui
     qt5gui = Ui_main_window()
     qt5gui.setupUi(main_window)
-
-    # show the window
     main_window.show()
-
-    # bind callbacks set in main.py
     qt5gui.btn_search.clicked.connect(on_search_clicked)
     qt5gui.cb_codes.clicked.connect(on_show_airport_codes_clicked)
     qt5gui.btn_flight_path_1.clicked.connect(on_flight_path_1_clicked)
@@ -25,8 +17,6 @@ def run_app() -> None:
     qt5gui.btn_flight_path_5.clicked.connect(on_flight_path_5_clicked)
     qt5gui.btn_flight_path_6.clicked.connect(on_flight_path_6_clicked)
     qt5gui.btn_flight_path_7.clicked.connect(on_flight_path_7_clicked)
-
-    # codes used for showing and hidding airport codes on the map
     global codes
     codes = {
         "ABQ": qt5gui.txt_ABQ,
@@ -77,7 +67,6 @@ def run_app() -> None:
         "TPA": qt5gui.txt_TPA,
         "TUL": qt5gui.txt_TUL
     }
-
     global widgets
     widgets = [
         qt5gui.w_flight_path_1,
@@ -88,11 +77,7 @@ def run_app() -> None:
         qt5gui.w_flight_path_6,
         qt5gui.w_flight_path_7
     ]
-
-    # method defined in main.py
     on_app_start()
-
-    # run the app until users closes the window or console
     sys.exit(app.exec_())
 
 def set_on_app_start(event) -> None:
